@@ -16,14 +16,16 @@ public class WeaponBuilder {
     }
 
     public WeaponBuilder addEnhancement(Enhancement enhancement) {
-        enhancements.add(enhancement);
+        if(enhancement != null){
+            enhancements.add(enhancement);
+        }
         return this;
     }
 
     public Weapon build(boolean special) {
 
         baseWeapon.setEnhancement(enhancements);
-        double totalCost = getTotalPrice(baseWeapon.getBaseCost(), enhancements);
+        baseWeapon.setFinalCost(getTotalPrice(baseWeapon.getBaseCost(), enhancements));
         baseWeapon.setSpecial(special);
         return baseWeapon;
     }

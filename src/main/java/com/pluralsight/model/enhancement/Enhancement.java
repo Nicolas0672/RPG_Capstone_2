@@ -6,11 +6,15 @@ import com.pluralsight.model.Rarity;
 public abstract class Enhancement implements Priceable, Describable {
     private final String name;
     private final Rarity rarity;
-    private final double baseCost;
+    private double baseCost;
 
     public Enhancement(String name,double baseCost, Rarity rarity) {
         this.name = name;
         this.rarity = rarity;
+        this.baseCost = baseCost;
+    }
+
+    public void setBaseCost(double baseCost) {
         this.baseCost = baseCost;
     }
 

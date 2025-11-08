@@ -10,32 +10,49 @@ import com.pluralsight.ui.utils.RPGDisplay;
 
 import java.util.List;
 import java.util.Scanner;
-import java.util.function.Function;
 
 public class AddSwordScreen {
     private final Scanner scanner = new Scanner(System.in);
     private final Helper helper = new Helper();
 
     public void displayAddWeapon(OrderService orderService) {
+        double currentWeaponPrice = 0;
+
         RPGDisplay.printSubTitle("⚔️ Forge Your Weapon ⚔️");
         RPGDisplay.printStory("Every hero needs a weapon worthy of legend!");
 
         String weaponType = displayWeaponType(orderService);
         Rarity rarity = displayRarity();
-
         Weapon weapon = orderService.weaponBuild(weaponType, rarity, true);
+        currentWeaponPrice = weapon.getBaseCost();
+
+        displayTotalCartPrice(currentWeaponPrice);
 
         Gem gem = displayPremiumGem(orderService);
-        if (gem != null) RPGDisplay.printEnhancementEffect("Gem: " + gem.getName());
+        if (gem != null) {
+            RPGDisplay.printEnhancementEffect("Gem: " + gem.getName());
+            currentWeaponPrice += gem.getBaseCost();
+        }
+
+        displayTotalCartPrice(currentWeaponPrice);
 
         Quirks quirk = displayQuirks(orderService);
-        if (quirk != null) RPGDisplay.printEnhancementEffect("Quirk: " + quirk.getName());
+        if (quirk != null) {
+            RPGDisplay.printEnhancementEffect("Quirk: " + quirk.getName());
+            currentWeaponPrice += quirk.getBaseCost();
+        }
+        displayTotalCartPrice(currentWeaponPrice);
 
         Buffs buff = displayBuffs(orderService);
-        if (buff != null) RPGDisplay.printEnhancementEffect("Buff: " + buff.getName());
+        if (buff != null) {
+            RPGDisplay.printEnhancementEffect("Buff: " + buff.getName());
+            currentWeaponPrice += buff.getBaseCost();
+        }
+        displayTotalCartPrice(currentWeaponPrice);
 
         Customization customization = displayCustomize(orderService);
         if (customization != null) RPGDisplay.printEnhancementEffect("Customization: " + customization.getName());
+        displayTotalCartPrice(currentWeaponPrice);
 
         boolean isSpecial = displaySpecial();
 
@@ -49,15 +66,13 @@ public class AddSwordScreen {
         orderService.addWeaponToCart(finalWeapon);
         RPGDisplay.printSuccess("🎉 Your weapon has been forged and added to your arsenal!\n");
         RPGDisplay.printDivider();
-        RPGDisplay.printWeaponCard(finalWeapon);
-        System.out.println();
     }
 
     public String displayWeaponType(OrderService orderService) {
         RPGDisplay.printStory("Select the weapon that calls to you:");
 
         List<Weapon> weapons = orderService.getAllWeapons();
-        displayWeaponCards(weapons);
+        displayWeaponCards(weapons, orderService);
 
         Weapon selectedWeapon = helper.getSelectionFromList(weapons, scanner);
         return selectedWeapon.getName();
@@ -67,7 +82,7 @@ public class AddSwordScreen {
         RPGDisplay.printStory("Choose a rarity worthy of your destiny:");
 
         List<Rarity> rarities = List.of(Rarity.values());
-        return helper.displaySelection(rarities, Rarity::name, scanner);
+        return helper.displaySelection(rarities, n -> n.toString(), scanner);
     }
 
     public Buffs displayBuffs(OrderService orderService) {
@@ -88,10 +103,12 @@ public class AddSwordScreen {
             try {
                 int choice = Integer.parseInt(input);
                 double multiplier = (choice == 1) ? 1.5 : 1.0;
-                return new Buffs(selectedBuff.getName(),
-                        selectedBuff.getBaseCost() * multiplier,
+                Buffs buff = new Buffs(selectedBuff.getName(),
+                        0,
                         selectedBuff.getRarity(),
                         selectedBuff.getType());
+                buff.setBaseCost(buff.calculateCost() * multiplier);
+                return buff;
             } catch (NumberFormatException e) {
                 RPGDisplay.printWarning("Please enter 1 or 2.\n");
             }
@@ -116,10 +133,12 @@ public class AddSwordScreen {
             try {
                 int choice = Integer.parseInt(input);
                 double multiplier = (choice == 1) ? 1.5 : 1.0;
-                return new Gem(selectedGem.getName(),
-                        selectedGem.getBaseCost() * multiplier,
+                Gem gem = new Gem(selectedGem.getName(),
+                        0,
                         selectedGem.getRarity(),
                         selectedGem.getGemType());
+                gem.setBaseCost(gem.calculateCost() * multiplier);
+                return gem;
             } catch (NumberFormatException e) {
                 RPGDisplay.printWarning("Please enter 1 or 2.\n");
             }
@@ -139,7 +158,12 @@ public class AddSwordScreen {
         displayCustomizationCards(customList);
         return helper.getSelectionFromList(customList, scanner);
     }
+    //
+    public void displayTotalCartPrice(double currentWeaponPrice){
+        System.out.printf("Current total price: %.2f\n", currentWeaponPrice);
+    }
 
+    // Make it special somehow
     public boolean displaySpecial() {
         while (true) {
             RPGDisplay.printStory("Would you like your weapon to hold a legendary essence?");
@@ -156,7 +180,7 @@ public class AddSwordScreen {
     }
 
     // Helper display methods
-    private void displayWeaponCards(List<Weapon> weapons) {
+    private void displayWeaponCards(List<Weapon> weapons, OrderService orderService) {
         System.out.println();
         for (int i = 0; i < weapons.size(); i++) {
             System.out.println(RPGDisplay.YELLOW + "Option " + (i + 1) + ":" + RPGDisplay.RESET);

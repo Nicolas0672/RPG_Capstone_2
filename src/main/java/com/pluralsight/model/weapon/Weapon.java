@@ -12,12 +12,22 @@ public abstract class Weapon extends Item implements Priceable {
     private List<Enhancement> enhancement;
     private final boolean hasAttributes;
     private boolean isSpecial;
+    private Double finalCost;
 
-    public Weapon(String name, double baseCost, Rarity rarity, int damage, boolean hasAttributes) {
+    public Weapon(String name, double baseCost, Rarity rarity, int damage, boolean hasAttributes, Double finalCost) {
         super(name, baseCost, rarity);
         this.damage = damage;
         this.hasAttributes = hasAttributes;
+        this.finalCost = finalCost;
         this.isSpecial = false;
+    }
+
+    public Double getFinalCost() {
+        return finalCost;
+    }
+
+    public void setFinalCost(Double finalCost) {
+        this.finalCost = finalCost;
     }
 
     public void setSpecial(boolean special) { this.isSpecial = special; }

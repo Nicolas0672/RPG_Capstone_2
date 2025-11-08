@@ -64,7 +64,7 @@ public class RPGDisplay {
 
         System.out.println(CYAN + "⚔️ " + name + " " + glow + RESET);
         System.out.println("Damage: " + damage);
-        System.out.println("Price: " + price);
+        System.out.println("Total price: " + price);
     }
 
     public static void printFinalWeaponCard(Weapon w) {
@@ -123,7 +123,6 @@ public class RPGDisplay {
         String description = b.getDescription();
 
         System.out.println(YELLOW + "✨ " + name + RESET);
-        System.out.println("Rarity: " + rarity);
         System.out.println("Price: " + price);
         System.out.println(description);
     }
@@ -137,9 +136,7 @@ public class RPGDisplay {
         String gemType = g.getGemType().toString();
 
         System.out.println(PURPLE + "💎 " + name + RESET);
-        System.out.println("Rarity: " + rarity);
         System.out.println("Price: " + price);
-        System.out.println(gemType);
     }
 
     // Print Quirk card
@@ -151,7 +148,6 @@ public class RPGDisplay {
         String description = q.getDescription();
 
         System.out.println(YELLOW + "⚡ " + name + RESET);
-        System.out.println("Rarity: " + rarity);
         System.out.println("Price: " + price);
         System.out.println(description);
     }
@@ -164,7 +160,6 @@ public class RPGDisplay {
         String description = c.getDescription();
 
         System.out.println(CYAN + "🖌️ " + name + RESET);
-        System.out.println("Rarity: " + rarity);
         System.out.println(description);
     }
 

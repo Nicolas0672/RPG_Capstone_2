@@ -18,6 +18,6 @@ public enum Rarity {
     @Override
     public String toString() {
         // Custom display formatting
-        return name();
+        return String.format("%s", name());
     }
 }

@@ -5,7 +5,7 @@ import com.pluralsight.model.Rarity;
 public class Sword extends Weapon{
 
     public Sword(String name, Rarity rarity, boolean bleed) {
-        super(name, 25, rarity, 30, bleed);
+        super(name, 25, rarity, 30, bleed, null);
     }
 
     @Override
