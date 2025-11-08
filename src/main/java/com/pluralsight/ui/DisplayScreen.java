@@ -1,62 +1,77 @@
 package com.pluralsight.ui;
 
+import com.pluralsight.model.*;
+import com.pluralsight.services.OrderService;
+import com.pluralsight.ui.utils.Helper;
+import com.pluralsight.ui.utils.RPGDisplay;
 import java.util.Scanner;
 
 public class DisplayScreen {
-Scanner scanner = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in);
+    OrderService orderService = new OrderService();
 
     public void displayHome() {
-        System.out.println("Welcome to RPG");
-        boolean valid = false;
-        while(!valid){
-            System.out.println("1) New Order\n0) Exist");
-            String input = scanner.nextLine();
+        RPGDisplay.printTitle("🌌 Eldoria Awaits 🌌");
+        RPGDisplay.printStory("You are a long-lost traveler returning to a land of magic and valor.");
+        RPGDisplay.printStory("Your destiny awaits — choose wisely, adventurer!\n");
+
+        while (true) {
+            RPGDisplay.printOption(1, "Embark on a new quest ⚔️ (New Order)");
+            RPGDisplay.printOption(0, "Rest for now 🛌 (Exit)\n");
+            String input = scanner.nextLine().trim();
+            System.out.println();
             switch (input) {
-                case "1" : displayNewOrder();
-                valid = true;
-                break;
-                case "2" : System.exit(0);
-                valid = true;
-                break;
+                case "1":
+                    displayNewOrder();
+                    break;
+                case "0":
+                    RPGDisplay.printStory("Farewell, traveler. May the winds guide your path. 🌬️\n");
+                    System.exit(0);
+                    break;
                 default:
-                    System.out.println("Invalid choice, please try again");
+                    RPGDisplay.printWarning("Invalid choice, please try again!\n");
             }
         }
     }
 
-    public void displayNewOrder(){
-        // Display newest entry first
+    public void displayNewOrder() {
+        RPGDisplay.printSubTitle("🗺️ Quest Board");
+        RPGDisplay.printStory("Prepare yourself with the best equipment before venturing out!\n");
 
         boolean valid = false;
-        while(!valid){
-            System.out.println("1) Add a weapon\n2) Add a potion\n3) Add your traveling companion\n4) Checkout\n5) Cancel");
-            String input = scanner.nextLine();
+        while (!valid) {
+            RPGDisplay.printOption(1, "Forge a legendary weapon ⚔️");
+            RPGDisplay.printOption(2, "Brew a magical potion ⚗️");
+            RPGDisplay.printOption(3, "Recruit a traveling companion 🐉");
+            RPGDisplay.printOption(4, "Venture to checkout 🏹");
+            RPGDisplay.printOption(5, "Abandon quest ❌\n");
+            String input = scanner.nextLine().trim();
+            System.out.println();
             switch (input) {
-                case "1": displayAddWeapon();
-                valid = true;
-                break;
-                case "2": displayAddPotion();
-                valid = true;
-                break;
-                case "3": displayAddCompanion();
-                valid = true;
-                break;
-                case "4": displayCheckout();
-                valid = true;
-                break;
-                case "0": displayCancelOrder();
-                valid = true;
-                break;
+                case "1":
+                    new AddSwordScreen().displayAddWeapon();
+                    valid = true;
+                    break;
+                case "2":
+                    new AddPotionScreen().displayAddPotion();
+                    valid = true;
+                    break;
+                case "3":
+                    RPGDisplay.printStory("Companion recruitment is under construction. 🐾\n");
+                    valid = true;
+                    break;
+                case "4":
+                    RPGDisplay.printStory("Your journey begins soon! Checkout coming soon. 🏹\n");
+                    valid = true;
+                    break;
+                case "5":
+                    RPGDisplay.printStory("You abandon the quest. Another time, perhaps...\n");
+                    valid = true;
+                    break;
                 default:
-                    System.out.println("Invalid option, please try again");
+                    RPGDisplay.printWarning("Invalid option, try again!\n");
             }
         }
     }
 
-    public void displayAddWeapon() {
-        boolean isValid = false;
-        while(!isValid) {
-            System.out.println("What kind of weapons would you like to add?\n1) Sword\n2) Axe\n3) Katana ");
-        }
-    }
 }

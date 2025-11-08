@@ -1,0 +1,127 @@
+package com.pluralsight.ui.utils;
+
+import com.pluralsight.model.enhancement.Buffs;
+import com.pluralsight.model.enhancement.Customization;
+import com.pluralsight.model.enhancement.Gem;
+import com.pluralsight.model.enhancement.Quirks;
+import com.pluralsight.model.weapon.Weapon;
+
+public class RPGDisplay {
+
+    // ANSI escape codes for colors
+    public static final String RESET = "\u001B[0m";
+    public static final String RED = "\u001B[31m";
+    public static final String GREEN = "\u001B[32m";
+    public static final String YELLOW = "\u001B[33m";
+    public static final String BLUE = "\u001B[34m";
+    public static final String PURPLE = "\u001B[35m";
+    public static final String CYAN = "\u001B[36m";
+    public static final String WHITE = "\u001B[37m";
+    public static final String BRIGHT = "\u001B[1m";
+
+    // Print main title
+    public static void printTitle(String text) {
+        System.out.println(PURPLE + BRIGHT + "✨=== " + text + " ===✨" + RESET);
+    }
+
+    // Print subtitle
+    public static void printSubTitle(String text) {
+        System.out.println(CYAN + "\n--- " + text + " ---" + RESET);
+    }
+
+    // Print menu option
+    public static void printOption(int index, String option) {
+        System.out.println(YELLOW + index + ") " + option + RESET);
+    }
+
+    // Print warning
+    public static void printWarning(String text) {
+        System.out.println(RED + "⚠️  " + text + RESET);
+    }
+
+    // Print success
+    public static void printSuccess(String text) {
+        System.out.println(GREEN + "✅ " + text + RESET);
+    }
+
+    // Print story flavor
+    public static void printStory(String text) {
+        System.out.println(BLUE + "📜 " + text + RESET);
+    }
+
+    // Divider
+    public static void printDivider() {
+        System.out.println(PURPLE + "════════════════════════════════════" + RESET);
+    }
+
+    // Print Weapon card
+    public static void printWeaponCard(Weapon w) {
+        String name = w.getName();
+        String damage = w.getDamage() + " ⚡";
+        String price = String.format("%.2f 💰", w.getBaseCost());
+        String glow = w.getRarity().name().equalsIgnoreCase("LEGENDARY") ? "🌟" : "";
+
+        System.out.println(CYAN + "⚔️ " + name + " " + glow + RESET);
+        System.out.println("Damage: " + damage);
+        System.out.println("Price: " + price);
+    }
+
+    // Print Buff card
+    public static void printBuffCard(Buffs b) {
+        if (b == null) return;
+        String name = b.getName();
+        String rarity = b.getRarity().toString();
+        String price = String.format("%.1f 💰", b.calculateCost());
+        String description = b.getDescription();
+
+        System.out.println(YELLOW + "✨ " + name + RESET);
+        System.out.println("Rarity: " + rarity);
+        System.out.println("Price: " + price);
+        System.out.println(description);
+    }
+
+    // Print Gem card
+    public static void printGemCard(Gem g) {
+        if (g == null) return;
+        String name = g.getName();
+        String rarity = g.getRarity().toString();
+        String price = String.format("%.1f 💰", g.calculateCost());
+        String gemType = g.getGemType().toString();
+
+        System.out.println(PURPLE + "💎 " + name + RESET);
+        System.out.println("Rarity: " + rarity);
+        System.out.println("Price: " + price);
+        System.out.println(gemType);
+    }
+
+    // Print Quirk card
+    public static void printQuirkCard(Quirks q) {
+        if (q == null) return;
+        String name = q.getName();
+        String rarity = q.getRarity().toString();
+        String price = String.format("%.1f 💰", q.calculateCost());
+        String description = q.getDescription();
+
+        System.out.println(YELLOW + "⚡ " + name + RESET);
+        System.out.println("Rarity: " + rarity);
+        System.out.println("Price: " + price);
+        System.out.println(description);
+    }
+
+    // Print Customization card
+    public static void printCustomizationCard(Customization c) {
+        if (c == null) return;
+        String name = c.getName();
+        String rarity = c.getRarity().toString();
+        String description = c.getDescription();
+
+        System.out.println(CYAN + "🖌️ " + name + RESET);
+        System.out.println("Rarity: " + rarity);
+        System.out.println(description);
+    }
+
+    // Print magical effect when adding enhancement
+    public static void printEnhancementEffect(String enhancement) {
+        System.out.println(GREEN + BRIGHT + "✨ " + enhancement + " has been imbued into your weapon! ✨" + RESET);
+    }
+}
