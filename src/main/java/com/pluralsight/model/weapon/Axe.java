@@ -10,6 +10,6 @@ public class Axe extends Weapon{
 
     @Override
     public double calculateCost() {
-        return getBaseCost();
+        return getBaseCost() * rarity.getMultiplier();
     }
 }

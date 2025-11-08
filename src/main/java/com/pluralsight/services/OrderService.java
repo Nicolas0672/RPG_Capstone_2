@@ -1,6 +1,7 @@
 package com.pluralsight.services;
 
 import com.pluralsight.model.*;
+import com.pluralsight.model.companion.*;
 import com.pluralsight.model.enhancement.Buffs;
 import com.pluralsight.model.enhancement.Customization;
 import com.pluralsight.model.enhancement.Gem;
@@ -15,6 +16,7 @@ public class OrderService {
     List<Weapon> totalWeaponList = new ArrayList<>();
     List<Double> totalPriceOrder = new ArrayList<>();
     List<Potion> potionList = new ArrayList<>();
+    List<Companion> companionList = new ArrayList<>();
 
     private static final List<Weapon> ALL_WEAPONS = List.of(
           new Sword("Sword", Rarity.LEGENDARY, true),
@@ -60,6 +62,12 @@ public class OrderService {
             new Potion("Regeneration Potion", 30, Rarity.LEGENDARY)
     );
 
+    public static final List<Companion> ALL_COMPANIONS = List.of(
+            new Dog("Dog", 50, Rarity.COMMON),
+            new Horse("Horse", 120, Rarity.COMMON),
+            new Owl("Owl", 180, Rarity.RARE),
+            new Dragon("Dragon", 1000, Rarity.LEGENDARY)
+    );
 
     public static final List<Customization> ALL_CUSTOMIZATIONS = List.of(
             new Customization("Arcane Glow", 0, Rarity.COMMON, CustomizationType.GLOW_EFFECT),
@@ -95,6 +103,10 @@ public class OrderService {
         return ALL_WEAPONS;
     }
 
+    public List<Companion> getAllCompanions(){
+        return ALL_COMPANIONS;
+    }
+
     public void addWeaponToCart(Weapon finalWeapon){
         totalWeaponList.add(finalWeapon);
         totalPriceOrder.add(finalWeapon.getBaseCost());
@@ -103,6 +115,11 @@ public class OrderService {
     public void addPotionToCart(Potion potion){
         potionList.add(potion);
         totalPriceOrder.add(potion.getBaseCost());
+    }
+
+    public void addCompanionToCart(Companion companion){
+        companionList.add(companion);
+        totalPriceOrder.add(companion.getPrice());
     }
 
 

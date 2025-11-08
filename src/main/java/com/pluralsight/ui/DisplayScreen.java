@@ -57,7 +57,7 @@ public class DisplayScreen {
                     valid = true;
                     break;
                 case "3":
-                    RPGDisplay.printStory("Companion recruitment is under construction. 🐾\n");
+                  new AddCompanionScreen().displayAddCompanion();
                     valid = true;
                     break;
                 case "4":
