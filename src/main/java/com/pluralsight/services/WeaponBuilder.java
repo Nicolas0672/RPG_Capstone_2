@@ -24,7 +24,6 @@ public class WeaponBuilder {
 
         baseWeapon.setEnhancement(enhancements);
         double totalCost = getTotalPrice(baseWeapon.getBaseCost(), enhancements);
-      baseWeapon.setBaseCost(totalCost);
         baseWeapon.setSpecial(special);
         return baseWeapon;
     }

@@ -11,8 +11,7 @@ import java.util.Scanner;
 public class AddCompanionScreen {
     private final Scanner scanner = new Scanner(System.in);
 
-    public void displayAddCompanion() {
-        OrderService orderService = new OrderService();
+    public void displayAddCompanion(OrderService orderService) {
         List<Companion> companionList = orderService.getAllCompanions();
         Helper helper = new Helper();
 

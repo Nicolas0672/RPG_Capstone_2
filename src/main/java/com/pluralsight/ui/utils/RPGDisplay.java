@@ -1,10 +1,11 @@
 package com.pluralsight.ui.utils;
 
-import com.pluralsight.model.enhancement.Buffs;
-import com.pluralsight.model.enhancement.Customization;
-import com.pluralsight.model.enhancement.Gem;
-import com.pluralsight.model.enhancement.Quirks;
+import com.pluralsight.model.companion.Companion;
+import com.pluralsight.model.enhancement.*;
+import com.pluralsight.model.potion.Potion;
 import com.pluralsight.model.weapon.Weapon;
+
+import java.util.List;
 
 public class RPGDisplay {
 
@@ -64,6 +65,53 @@ public class RPGDisplay {
         System.out.println(CYAN + "⚔️ " + name + " " + glow + RESET);
         System.out.println("Damage: " + damage);
         System.out.println("Price: " + price);
+    }
+
+    public static void printFinalWeaponCard(Weapon w) {
+        List<Enhancement> enhancementList = w.getEnhancement();
+        String name = w.getName();
+        String damage = w.getDamage() + " ⚡";
+        String price = String.format("%.2f 💰", w.getBaseCost());
+        String special = w.hasSpecial() ? "Yes ✨" : "No";
+
+        System.out.println(CYAN + "╔════════════════════════════════════╗" + RESET);
+        System.out.printf(CYAN + "║ ⚔️ %-32s ║\n" + RESET, name);
+        System.out.println(CYAN + "╠════════════════════════════════════╣" + RESET);
+        System.out.printf(CYAN + "║ %-32s ║\n" + RESET, "Damage: " + damage);
+        System.out.printf(CYAN + "║ %-32s ║\n" + RESET, "Price: " + price);
+        System.out.printf(CYAN + "║ %-32s ║\n" + RESET, "Special: " + special);
+        System.out.println(CYAN + "╠════════ Enhancements ═════════════╣" + RESET);
+
+        if (enhancementList.isEmpty()) {
+            System.out.printf(CYAN + "║ %-32s ║\n" + RESET, "None");
+        } else {
+            for (Enhancement e : enhancementList) {
+                String type = e.getClass().getSimpleName(); // Buff, Gem, Quirk, Customization
+                String eName = e.getName();
+                String ePrice = String.format("%.2f 💰", e.calculateCost());
+                System.out.printf(CYAN + "║ %-10s: %-19s %7s ║\n" + RESET, type, eName, ePrice);
+            }
+        }
+
+        System.out.println(CYAN + "╚════════════════════════════════════╝" + RESET);
+    }
+    public static void printFinalPotionCard(Potion p) {
+        System.out.println(GREEN + "╔════════════════════════════════════╗" + RESET);
+        System.out.printf(GREEN + "║ 🧪 %-32s ║\n" + RESET, p.getName());
+        System.out.println(GREEN + "╠════════════════════════════════════╣" + RESET);
+        System.out.printf(GREEN + "║ %-32s ║\n" + RESET, "Price: " + String.format("%.2f 💰", p.getBaseCost()));
+        System.out.printf(GREEN + "║ %-32s ║\n" + RESET, "Rarity: " + p.getRarity());
+        System.out.println(GREEN + "╚════════════════════════════════════╝" + RESET);
+    }
+
+    // Print companion card
+    public static void printFinalCompanionCard(Companion c) {
+        System.out.println(YELLOW + "╔════════════════════════════════════╗" + RESET);
+        System.out.printf(YELLOW + "║ 🐾 %-32s ║\n" + RESET, c.getName());
+        System.out.println(YELLOW + "╠════════════════════════════════════╣" + RESET);
+        System.out.printf(YELLOW + "║ %-32s ║\n" + RESET, "Price: " + String.format("%.2f 💰", c.getPrice()));
+        System.out.printf(YELLOW + "║ %-32s ║\n" + RESET, "Rarity: " + c.getRarity());
+        System.out.println(YELLOW + "╚════════════════════════════════════╝" + RESET);
     }
 
     // Print Buff card

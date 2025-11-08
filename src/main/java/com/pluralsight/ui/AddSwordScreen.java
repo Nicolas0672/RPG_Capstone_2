@@ -14,28 +14,27 @@ import java.util.function.Function;
 
 public class AddSwordScreen {
     private final Scanner scanner = new Scanner(System.in);
-    private final OrderService orderService = new OrderService();
     private final Helper helper = new Helper();
 
-    public void displayAddWeapon() {
+    public void displayAddWeapon(OrderService orderService) {
         RPGDisplay.printSubTitle("⚔️ Forge Your Weapon ⚔️");
         RPGDisplay.printStory("Every hero needs a weapon worthy of legend!");
 
-        String weaponType = displayWeaponType();
+        String weaponType = displayWeaponType(orderService);
         Rarity rarity = displayRarity();
 
         Weapon weapon = orderService.weaponBuild(weaponType, rarity, true);
 
-        Gem gem = displayPremiumGem();
+        Gem gem = displayPremiumGem(orderService);
         if (gem != null) RPGDisplay.printEnhancementEffect("Gem: " + gem.getName());
 
-        Quirks quirk = displayQuirks();
+        Quirks quirk = displayQuirks(orderService);
         if (quirk != null) RPGDisplay.printEnhancementEffect("Quirk: " + quirk.getName());
 
-        Buffs buff = displayBuffs();
+        Buffs buff = displayBuffs(orderService);
         if (buff != null) RPGDisplay.printEnhancementEffect("Buff: " + buff.getName());
 
-        Customization customization = displayCustomize();
+        Customization customization = displayCustomize(orderService);
         if (customization != null) RPGDisplay.printEnhancementEffect("Customization: " + customization.getName());
 
         boolean isSpecial = displaySpecial();
@@ -54,7 +53,7 @@ public class AddSwordScreen {
         System.out.println();
     }
 
-    public String displayWeaponType() {
+    public String displayWeaponType(OrderService orderService) {
         RPGDisplay.printStory("Select the weapon that calls to you:");
 
         List<Weapon> weapons = orderService.getAllWeapons();
@@ -71,7 +70,7 @@ public class AddSwordScreen {
         return helper.displaySelection(rarities, Rarity::name, scanner);
     }
 
-    public Buffs displayBuffs() {
+    public Buffs displayBuffs(OrderService orderService) {
         List<Buffs> buffsList = orderService.getAllBuffs();
         RPGDisplay.printStory("Select magical buffs to empower your weapon:");
 
@@ -99,7 +98,7 @@ public class AddSwordScreen {
         }
     }
 
-    public Gem displayPremiumGem() {
+    public Gem displayPremiumGem(OrderService orderService) {
         List<Gem> gemList = orderService.getAllGems();
         RPGDisplay.printStory("Select a gem to imbue your weapon with mystical power:");
 
@@ -127,14 +126,14 @@ public class AddSwordScreen {
         }
     }
 
-    public Quirks displayQuirks() {
+    public Quirks displayQuirks(OrderService orderService) {
         List<Quirks> quirkList = orderService.getAllQuirks();
         RPGDisplay.printStory("Add a quirky trait to your weapon (optional):");
         displayQuirkCards(quirkList);
         return helper.getSelectionFromList(quirkList, scanner);
     }
 
-    public Customization displayCustomize() {
+    public Customization displayCustomize(OrderService orderService) {
         List<Customization> customList = orderService.getAllCustomizations();
         RPGDisplay.printStory("Add a personal touch to your weapon (optional):");
         displayCustomizationCards(customList);

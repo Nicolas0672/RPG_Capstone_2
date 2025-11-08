@@ -13,10 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderService {
-    List<Weapon> totalWeaponList = new ArrayList<>();
-    List<Double> totalPriceOrder = new ArrayList<>();
-    List<Potion> potionList = new ArrayList<>();
-    List<Companion> companionList = new ArrayList<>();
+    private List<Weapon> totalWeaponList = new ArrayList<>();
+    private List<Double> totalPriceOrder = new ArrayList<>();
+    private List<Potion> potionList = new ArrayList<>();
+    private List<Companion> companionList = new ArrayList<>();
 
     private static final List<Weapon> ALL_WEAPONS = List.of(
           new Sword("Sword", Rarity.LEGENDARY, true),
@@ -94,6 +94,17 @@ public class OrderService {
         return ALL_QUIRKS;
     }
 
+    public List<Double> getTotalPriceOrder() {
+        return totalPriceOrder;
+    }
+
+    public List<Potion> getPotionList() {
+        return potionList;
+    }
+
+    public List<Companion> getCompanionList() {
+        return companionList;
+    }
 
     public List<Buffs> getAllBuffs() {
         return ALL_BUFFS;
@@ -121,8 +132,6 @@ public class OrderService {
         companionList.add(companion);
         totalPriceOrder.add(companion.getPrice());
     }
-
-
 
     public List<Weapon> getTotalWeaponList() {
         return totalWeaponList;

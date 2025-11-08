@@ -49,19 +49,19 @@ public class DisplayScreen {
             System.out.println();
             switch (input) {
                 case "1":
-                    new AddSwordScreen().displayAddWeapon();
+                    new AddSwordScreen().displayAddWeapon(orderService);
                     valid = true;
                     break;
                 case "2":
-                    new AddPotionScreen().displayAddPotion();
+                    new AddPotionScreen().displayAddPotion(orderService);
                     valid = true;
                     break;
                 case "3":
-                  new AddCompanionScreen().displayAddCompanion();
+                  new AddCompanionScreen().displayAddCompanion(orderService);
                     valid = true;
                     break;
                 case "4":
-                    RPGDisplay.printStory("Your journey begins soon! Checkout coming soon. 🏹\n");
+                   new DisplayCheckoutScreen().displayCheckout(orderService);
                     valid = true;
                     break;
                 case "5":

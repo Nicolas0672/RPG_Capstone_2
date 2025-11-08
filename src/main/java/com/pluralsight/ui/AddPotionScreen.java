@@ -10,8 +10,7 @@ import java.util.Scanner;
 
 public class AddPotionScreen {
     private final Scanner scanner = new Scanner(System.in);
-    public void displayAddPotion() {
-        OrderService orderService = new OrderService();
+    public void displayAddPotion(OrderService orderService) {
         List<Potion> potionList = orderService.getAllPotions();
         Helper helper = new Helper();
 
