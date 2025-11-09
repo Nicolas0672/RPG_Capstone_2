@@ -41,10 +41,11 @@ public class DisplayScreen {
         boolean valid = false;
         while (!valid) {
             RPGDisplay.printOption(1, "Forge a legendary weapon ⚔️");
-            RPGDisplay.printOption(2, "Brew a magical potion ⚗️");
-            RPGDisplay.printOption(3, "Recruit a traveling companion 🐉");
-            RPGDisplay.printOption(4, "Venture to checkout 🏹");
-            RPGDisplay.printOption(5, "Abandon quest ❌\n");
+            RPGDisplay.printOption(2, "Find a forged set");
+            RPGDisplay.printOption(3, "Brew a magical potion ⚗️");
+            RPGDisplay.printOption(4, "Recruit a traveling companion 🐉");
+            RPGDisplay.printOption(5, "Venture to checkout 🏹");
+            RPGDisplay.printOption(6, "Abandon quest ❌\n");
             String input = scanner.nextLine().trim();
             System.out.println();
             switch (input) {
@@ -53,18 +54,22 @@ public class DisplayScreen {
                     valid = true;
                     break;
                 case "2":
-                    new AddPotionScreen().displayAddPotion(orderService);
+                    new AddExistingOrder().displayAddExisting(orderService);
                     valid = true;
                     break;
                 case "3":
-                  new AddCompanionScreen().displayAddCompanion(orderService);
+                    new AddPotionScreen().displayAddPotion(orderService);
                     valid = true;
                     break;
                 case "4":
-                   new DisplayCheckoutScreen().displayCheckout(orderService);
+                  new AddCompanionScreen().displayAddCompanion(orderService);
                     valid = true;
                     break;
                 case "5":
+                   new DisplayCheckoutScreen().displayCheckout(orderService);
+                    valid = true;
+                    break;
+                case "6":
                     RPGDisplay.printStory("You abandon the quest. Another time, perhaps...\n");
                     valid = true;
                     break;

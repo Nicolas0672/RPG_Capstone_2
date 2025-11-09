@@ -10,10 +10,9 @@ import java.util.Scanner;
 
 public class AddPotionScreen {
     private final Scanner scanner = new Scanner(System.in);
-    public void displayAddPotion(OrderService orderService) {
-        List<Potion> potionList = orderService.getAllPotions();
-        Helper helper = new Helper();
 
+    public boolean displayAddPotion(OrderService orderService) {
+        List<Potion> potionList = orderService.getAllPotions();
 
         RPGDisplay.printSubTitle("🧪 Potion Stand 🧪");
         RPGDisplay.printStory("Welcome, traveler! Browse our collection of magical potions below.\n");
@@ -27,12 +26,12 @@ public class AddPotionScreen {
         RPGDisplay.printOption(0, "Return to Quest Board\n");
 
         // Let user select potion using the generic selector
-        Potion selectedPotion = helper.getSelectionFromList(potionList, scanner);
+        Potion selectedPotion = Helper.getSelectionFromList(potionList, scanner);
 
         // If user chose 0 (return)
         if (selectedPotion == null) {
             RPGDisplay.printStory("You step away from the potion stand.\n");
-            return;
+            return false;
         }
 
         // Confirm purchase
@@ -47,10 +46,10 @@ public class AddPotionScreen {
                 case "1":
                     orderService.addPotionToCart(selectedPotion);
                     RPGDisplay.printSuccess("🧴 " + selectedPotion.getName() + " has been added to your inventory!\n");
-                    return;
+                    return true;
                 case "2":
                     RPGDisplay.printStory("You decide not to buy that potion.\n");
-                    return;
+                    return false;
                 default:
                     RPGDisplay.printWarning("Please enter 1 or 2.\n");
             }

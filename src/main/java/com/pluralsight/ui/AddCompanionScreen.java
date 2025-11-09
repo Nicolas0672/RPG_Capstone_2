@@ -11,9 +11,8 @@ import java.util.Scanner;
 public class AddCompanionScreen {
     private final Scanner scanner = new Scanner(System.in);
 
-    public void displayAddCompanion(OrderService orderService) {
+    public boolean displayAddCompanion(OrderService orderService) {
         List<Companion> companionList = orderService.getAllCompanions();
-        Helper helper = new Helper();
 
         RPGDisplay.printSubTitle("🐾 Companion Stall 🐾");
         RPGDisplay.printStory("Greetings, adventurer! Choose a loyal companion to aid you on your journey.\n");
@@ -27,12 +26,12 @@ public class AddCompanionScreen {
         RPGDisplay.printOption(0, "Return to Quest Board\n");
 
         // Let user select companion using the generic selector
-        Companion selectedCompanion = helper.getSelectionFromList(companionList, scanner);
+        Companion selectedCompanion = Helper.getSelectionFromList(companionList, scanner);
 
         // If user chose 0 (return)
         if (selectedCompanion == null) {
             RPGDisplay.printStory("You step away from the companion stall.\n");
-            return;
+            return false;
         }
 
         // Confirm purchase
@@ -47,10 +46,10 @@ public class AddCompanionScreen {
                 case "1":
                     orderService.addCompanionToCart(selectedCompanion);
                     RPGDisplay.printSuccess("🐾 " + selectedCompanion.getName() + " has joined your journey!\n");
-                    return;
+                    return true;
                 case "2":
                     RPGDisplay.printStory("You decide not to recruit that companion.\n");
-                    return;
+                    return false;
                 default:
                     RPGDisplay.printWarning("Please enter 1 or 2.\n");
             }

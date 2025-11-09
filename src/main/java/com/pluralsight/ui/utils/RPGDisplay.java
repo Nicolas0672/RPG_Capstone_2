@@ -35,6 +35,10 @@ public class RPGDisplay {
         System.out.println(YELLOW + index + ") " + option + RESET);
     }
 
+    public static void printOptions(String text) {
+        System.out.println(YELLOW + text + RESET);
+    }
+
     // Print warning
     public static void printWarning(String text) {
         System.out.println(RED + "⚠️  " + text + RESET);

@@ -10,15 +10,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderService {
-    private List<Weapon> totalWeaponList = new ArrayList<>();
-    private List<Double> totalPriceOrder = new ArrayList<>();
-    private List<Potion> potionList = new ArrayList<>();
-    private List<Companion> companionList = new ArrayList<>();
+    private final List<Weapon> totalWeaponList = new ArrayList<>();
+    private final List<Double> totalPriceOrder = new ArrayList<>();
+    private final List<Potion> potionList = new ArrayList<>();
+    private final List<Companion> companionList = new ArrayList<>();
 
     private static final List<Weapon> ALL_WEAPONS = List.of(
           new Sword("Sword", Rarity.LEGENDARY, true),
           new Axe("Axe", Rarity.COMMON, false), new Katana("Katana", Rarity.RARE, true)
     );
+
+    private static final List<List<Priceable>> ALL_TYPE_OF_ORDERS = createExistingOrders();
 
     public static final List<Buffs> ALL_BUFFS = List.of(
             new Buffs("Forceful Strike", 5, Rarity.COMMON, BuffType.KNOCKBACK),
@@ -60,10 +62,10 @@ public class OrderService {
     );
 
     public static final List<Companion> ALL_COMPANIONS = List.of(
-            new Dog("Dog", 50, Rarity.COMMON),
-            new Horse("Horse", 120, Rarity.COMMON),
-            new Owl("Owl", 180, Rarity.RARE),
-            new Dragon("Dragon", 1000, Rarity.LEGENDARY)
+            new Dog("Dog", 5, Rarity.COMMON),
+            new Horse("Horse", 20, Rarity.COMMON),
+            new Owl("Owl", 35, Rarity.RARE),
+            new Dragon("Dragon", 50, Rarity.LEGENDARY)
     );
 
     public static final List<Customization> ALL_CUSTOMIZATIONS = List.of(
@@ -77,6 +79,10 @@ public class OrderService {
 
     public List<Customization> getAllCustomizations(){
         return ALL_CUSTOMIZATIONS;
+    }
+
+    public List<List<Priceable>> getAllTypeOfOrders() {
+        return ALL_TYPE_OF_ORDERS;
     }
 
     public List<Potion> getAllPotions(){
@@ -145,6 +151,23 @@ public class OrderService {
         return totalPriceOrder.stream().reduce(0.0, (a, b) -> a + b);
     }
 
+    public static void removeEnhancementFromWeapon(Weapon w, String enhancementName, String type){
+        List<Enhancement> enhancementList = new ArrayList<>(w.getEnhancement());
+        switch (type){
+            case "gem" -> enhancementList.removeIf(e -> e instanceof Gem && e.getName().equalsIgnoreCase(enhancementName));
+            case "buff" -> enhancementList.removeIf(b -> b instanceof Buffs && b.getName().equalsIgnoreCase(enhancementName));
+
+        }
+
+        w.setEnhancement(enhancementList);
+    }
+
+    public static void addEnhancementToWeapon(Weapon weapon, Enhancement enhancement){
+       List<Enhancement> enhancementList = weapon.getEnhancement();
+       enhancementList.add(enhancement);
+       weapon.setEnhancement(enhancementList);
+    }
+
     public Weapon weaponBuild(String name, Rarity rarity, boolean hasSpecialAttributes){
         if(name.equalsIgnoreCase("sword")){
             Sword sword=  new Sword("Sword", rarity, hasSpecialAttributes);
@@ -163,4 +186,59 @@ public class OrderService {
             return null;
         }
     }
+
+    // Helper
+    private static List<List<Priceable>> createExistingOrders() {
+        List<List<Priceable>> orderList = new ArrayList<>();
+        WeaponBuilder weaponBuilder = new WeaponBuilder();
+
+        // 1️⃣ FLAMEBRINGER — Sword with fire-themed enhancements
+        Weapon flamebringer = new Sword("Flamebringer (LENGENDARY)", Rarity.LEGENDARY, true);
+        flamebringer.setEnhancement(List.of(
+                new Buffs("Mighty Blow", 13, Rarity.RARE, BuffType.DAMAGE_BOOST),
+                new Gem("Blazing Edge", 10, Rarity.COMMON, GemType.FIRE)
+        ));
+        flamebringer.setBaseCost(flamebringer.calculateCost());
+        flamebringer.setDamage(40);
+        flamebringer.setFinalCost(weaponBuilder.getTotalPrice(flamebringer.getBaseCost(), flamebringer.getEnhancement()));
+
+        Potion flamePotion = new Potion("Fire resistance potion", 10, Rarity.RARE);
+        Companion horse = new Horse("Horse", 30, Rarity.RARE);
+
+        orderList.add(List.of(flamebringer, flamePotion, horse));
+
+        // 2️⃣ FROSTBITE — Axe with ice-themed enhancements
+        Weapon frostbite = new Axe("Frostbite (RARE)", Rarity.RARE, true);
+        frostbite.setEnhancement(List.of(
+                new Buffs("Swift Strikes", 20, Rarity.COMMON, BuffType.ATTACK_SPEED),
+                new Gem("Frost Edge", 5, Rarity.COMMON, GemType.ICE),
+                new Customization("Mirror Finish", 0, Rarity.COMMON, CustomizationType.SHEEN_FINISH)
+        ));
+        frostbite.setBaseCost(frostbite.calculateCost());
+        frostbite.setDamage(30);
+        frostbite.setFinalCost(weaponBuilder.getTotalPrice(frostbite.getBaseCost(), frostbite.getEnhancement() ));
+
+        Potion potion = new Potion("Swift Potion", 15, Rarity.COMMON);
+        Companion dog = new Dog("Dog", 5, Rarity.COMMON);
+        orderList.add(List.of(frostbite, potion, dog));
+
+        // 3️⃣ NIGHTSTALKER — Katana with a single buff
+        Weapon nightstalker = new Katana("Nightstalker (LEGENDARY)", Rarity.LEGENDARY, true);
+        nightstalker.setEnhancement(List.of(
+                new Buffs("Deadly Precision", 30, Rarity.RARE, BuffType.CRITICAL_CHANCE)
+        ));
+        nightstalker.setDamage(60);
+        nightstalker.setBaseCost(nightstalker.calculateCost());
+        nightstalker.setFinalCost(weaponBuilder.getTotalPrice(nightstalker.getBaseCost(), nightstalker.getEnhancement()));
+
+        Potion nightVision = new Potion("Night Resistance", 25, Rarity.LEGENDARY);
+        Companion dragon = new Dragon("Dragon", 50, Rarity.LEGENDARY);
+
+        orderList.add(List.of(nightstalker, nightVision, dragon));
+
+        return orderList;
+    }
+
+
+
 }
