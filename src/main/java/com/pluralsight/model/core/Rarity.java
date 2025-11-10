@@ -1,4 +1,4 @@
-package com.pluralsight.model;
+package com.pluralsight.model.core;
 
 public enum Rarity {
     COMMON(1.0),
@@ -18,6 +18,11 @@ public enum Rarity {
     @Override
     public String toString() {
         // Custom display formatting
-        return name();
+        return String.format("%s", name());
+    }
+
+    public String printRarityCost() {
+        // Custom display formatting
+        return String.format("%s -> %.2fX EXTRA COST", name(), getMultiplier());
     }
 }

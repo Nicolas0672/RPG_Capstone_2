@@ -1,5 +1,6 @@
-package com.pluralsight.model;
+package com.pluralsight.model.interfaces;
 
 public interface Priceable {
     double calculateCost();
+
 }

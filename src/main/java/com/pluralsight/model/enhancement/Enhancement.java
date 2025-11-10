@@ -1,16 +1,21 @@
 package com.pluralsight.model.enhancement;
 
-import com.pluralsight.model.Priceable;
-import com.pluralsight.model.Rarity;
+import com.pluralsight.model.interfaces.Describable;
+import com.pluralsight.model.interfaces.Priceable;
+import com.pluralsight.model.core.Rarity;
 
 public abstract class Enhancement implements Priceable, Describable {
     private final String name;
     private final Rarity rarity;
-    private final double baseCost;
+    private double baseCost;
 
     public Enhancement(String name,double baseCost, Rarity rarity) {
         this.name = name;
         this.rarity = rarity;
+        this.baseCost = baseCost;
+    }
+
+    public void setBaseCost(double baseCost) {
         this.baseCost = baseCost;
     }
 

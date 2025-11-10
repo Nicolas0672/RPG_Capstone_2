@@ -17,9 +17,9 @@ public class DisplayScreen {
 
         while (true) {
             RPGDisplay.printOption(1, "Embark on a new quest ⚔️ (New Order)");
-            RPGDisplay.printOption(0, "Rest for now 🛌 (Exit)\n");
+            RPGDisplay.printOption(0, "Rest for now 🛌 (Exit)");
             String input = scanner.nextLine().trim();
-            System.out.println();
+
             switch (input) {
                 case "1":
                     displayNewOrder();
@@ -41,30 +41,35 @@ public class DisplayScreen {
         boolean valid = false;
         while (!valid) {
             RPGDisplay.printOption(1, "Forge a legendary weapon ⚔️");
-            RPGDisplay.printOption(2, "Brew a magical potion ⚗️");
-            RPGDisplay.printOption(3, "Recruit a traveling companion 🐉");
-            RPGDisplay.printOption(4, "Venture to checkout 🏹");
-            RPGDisplay.printOption(5, "Abandon quest ❌\n");
+            RPGDisplay.printOption(2, "Find a forged set");
+            RPGDisplay.printOption(3, "Brew a magical potion ⚗️");
+            RPGDisplay.printOption(4, "Recruit a traveling companion 🐉");
+            RPGDisplay.printOption(5, "Venture to checkout 🏹");
+            RPGDisplay.printOption(6, "Abandon quest ❌\n");
             String input = scanner.nextLine().trim();
-            System.out.println();
+
             switch (input) {
                 case "1":
-                    new AddSwordScreen().displayAddWeapon();
+                    new AddSwordScreen().displayAddWeapon(orderService);
                     valid = true;
                     break;
                 case "2":
-                    new AddPotionScreen().displayAddPotion();
+                    new AddExistingOrder().displayAddExisting(orderService);
                     valid = true;
                     break;
                 case "3":
-                    RPGDisplay.printStory("Companion recruitment is under construction. 🐾\n");
+                    new AddPotionScreen().displayAddPotion(orderService);
                     valid = true;
                     break;
                 case "4":
-                    RPGDisplay.printStory("Your journey begins soon! Checkout coming soon. 🏹\n");
+                  new AddCompanionScreen().displayAddCompanion(orderService);
                     valid = true;
                     break;
                 case "5":
+                   new DisplayCheckoutScreen().displayCheckout(orderService);
+                    valid = true;
+                    break;
+                case "6":
                     RPGDisplay.printStory("You abandon the quest. Another time, perhaps...\n");
                     valid = true;
                     break;
