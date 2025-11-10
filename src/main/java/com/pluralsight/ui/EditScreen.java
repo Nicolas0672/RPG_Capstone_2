@@ -87,7 +87,7 @@ public class EditScreen {
                     Gem gem = Helper.getSelectionFromList(gemList, scanner);
                     if (gem == null) break;
                     OrderService.addEnhancementToWeapon(weapon, gem);
-                    RPGDisplay.printSuccess(String.format("Congratulations! %s has been imbued to the sword.", gem.getName()));
+                    RPGDisplay.printSuccess(String.format("Congratulations! %s has been imbued to the weapon.", gem.getName()));
                     isValid = true;
                     break;
                 case "2":
@@ -169,7 +169,7 @@ public class EditScreen {
         }
 
         OrderService.addEnhancementToWeapon(weapon, buff);
-        RPGDisplay.printSuccess(String.format("Congratulations! %s has been added to the sword.", buff.getName()));
+        RPGDisplay.printSuccess(String.format("Congratulations! %s has been added to the weapon.", buff.getName()));
     }
 
     /**
@@ -246,7 +246,7 @@ public class EditScreen {
         }
 
         OrderService.addEnhancementToWeapon(weapon, quirk);
-        RPGDisplay.printSuccess(String.format("Congratulations! %s has been added to the sword.", quirk.getName()));
+        RPGDisplay.printSuccess(String.format("Congratulations! %s has been added to the weapon.", quirk.getName()));
     }
 
     public void displayRemoveQuirk(OrderService orderService, Weapon weapon, List<String> quirkList) {

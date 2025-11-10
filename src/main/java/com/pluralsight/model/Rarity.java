@@ -20,4 +20,9 @@ public enum Rarity {
         // Custom display formatting
         return String.format("%s", name());
     }
+
+    public String printRarityCost() {
+        // Custom display formatting
+        return String.format("%s -> %.2fX EXTRA COST", name(), getMultiplier());
+    }
 }

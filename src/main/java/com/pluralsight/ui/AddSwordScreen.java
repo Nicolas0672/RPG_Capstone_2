@@ -110,7 +110,7 @@ public class AddSwordScreen {
         RPGDisplay.printStory("Choose a rarity worthy of your destiny:");
 
         List<Rarity> rarities = List.of(Rarity.values());
-        return Helper.displaySelection(rarities, Rarity::toString, scanner);
+        return Helper.displaySelection(rarities, Rarity::printRarityCost, scanner);
     }
 
     // ---------------------
@@ -224,7 +224,7 @@ public class AddSwordScreen {
     // ---------------------
     public boolean displaySpecial() {
         while (true) {
-            RPGDisplay.printStory("Would you like your weapon to hold a legendary essence?");
+            RPGDisplay.printStory("Add legendary essence to your weapon to unlock special powers?");
             RPGDisplay.printOption(1, "Yes ✨");
             RPGDisplay.printOption(2, "No");
 

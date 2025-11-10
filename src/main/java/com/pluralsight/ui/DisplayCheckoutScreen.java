@@ -38,20 +38,7 @@ public class DisplayCheckoutScreen {
         // ---------------------
         if(!weaponList.isEmpty() || !potionList.isEmpty() || !companionList.isEmpty()){
             bought = true;
-            System.out.println("🛒 Your Total Order:");
-
-            if(!weaponList.isEmpty()){
-                System.out.println("\n⚔️ Weapons:");
-                for (Weapon w : weaponList) RPGDisplay.printFinalWeaponCard(w);
-            }
-            if(!potionList.isEmpty()){
-                System.out.println("🧪 Potions:");
-                for (Potion p : potionList) RPGDisplay.printFinalPotionCard(p);
-            }
-            if(!companionList.isEmpty()){
-                System.out.println("🐾 Companions:");
-                for (Companion c : companionList) RPGDisplay.printFinalCompanionCard(c);
-            }
+            displayTotalItemInCart(weaponList, potionList, companionList);
 
             // ---------------------
             // Prompt to add at least a potion or companion if cart is empty
@@ -89,7 +76,8 @@ public class DisplayCheckoutScreen {
             RPGDisplay.printStory("Would you like to pay now or edit your order?");
             RPGDisplay.printOption(1, "Pay now");
             RPGDisplay.printOption(2, "Edit");
-            RPGDisplay.printOption(3, "Return");
+            RPGDisplay.printOption(3, "Show cart");
+            RPGDisplay.printOption(4, "Return");
 
             String input = scanner.nextLine();
             switch (input){
@@ -101,6 +89,9 @@ public class DisplayCheckoutScreen {
                     displayEditCart(orderService);
                     break;
                 case "3":
+                    displayTotalItemInCart(weaponList, potionList, companionList);
+                    break;
+                case "4":
                     RPGDisplay.printLeavingMessage();
                     return;
                 default:
@@ -118,6 +109,23 @@ public class DisplayCheckoutScreen {
                 orderService.getPotionList(),
                 orderService.getCompanionList());
         orderService.clearCart();
+    }
+
+    public void displayTotalItemInCart(List<Weapon> weaponList, List<Potion> potionList, List<Companion> companionList){
+        System.out.println("🛒 Your Total Order:");
+
+        if(!weaponList.isEmpty()){
+            System.out.println("\n⚔️ Weapons:");
+            for (Weapon w : weaponList) RPGDisplay.printFinalWeaponCard(w);
+        }
+        if(!potionList.isEmpty()){
+            System.out.println("🧪 Potions:");
+            for (Potion p : potionList) RPGDisplay.printFinalPotionCard(p);
+        }
+        if(!companionList.isEmpty()){
+            System.out.println("🐾 Companions:");
+            for (Companion c : companionList) RPGDisplay.printFinalCompanionCard(c);
+        }
     }
 
     // ---------------------
