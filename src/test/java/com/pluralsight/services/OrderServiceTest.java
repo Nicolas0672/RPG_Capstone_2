@@ -1,14 +1,11 @@
 package com.pluralsight.services;
 
-import com.pluralsight.model.BuffType;
-import com.pluralsight.model.GemType;
-import com.pluralsight.model.Priceable;
-import com.pluralsight.model.Rarity;
+import com.pluralsight.model.core.BuffType;
+import com.pluralsight.model.core.GemType;
+import com.pluralsight.model.interfaces.Priceable;
+import com.pluralsight.model.core.Rarity;
 import com.pluralsight.model.enhancement.Buffs;
 import com.pluralsight.model.enhancement.Gem;
-import com.pluralsight.model.enhancement.Quirks;
-import com.pluralsight.model.enhancement.Customization;
-import com.pluralsight.model.weapon.Axe;
 import com.pluralsight.model.weapon.Sword;
 import com.pluralsight.model.weapon.Weapon;
 import com.pluralsight.model.potion.Potion;
@@ -62,7 +59,7 @@ class OrderServiceTest {
         assertTrue(sword.getEnhancement().contains(buff));
 
         // Adding same name again should replace old one
-        Buffs duplicateBuff = new Buffs("💥 Mighty Blow", 20, com.pluralsight.model.Rarity.RARE, BuffType.DAMAGE_BOOST);
+        Buffs duplicateBuff = new Buffs("💥 Mighty Blow", 20, Rarity.RARE, BuffType.DAMAGE_BOOST);
         OrderService.addEnhancementToWeapon(sword, duplicateBuff);
         assertTrue(sword.getEnhancement().contains(duplicateBuff));
         assertEquals(1, sword.getEnhancement().stream().filter(e -> e.getName().equals("💥 Mighty Blow")).count());

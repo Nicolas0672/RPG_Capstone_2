@@ -1,6 +1,6 @@
 package com.pluralsight.ui;
 
-import com.pluralsight.model.*;
+import com.pluralsight.model.core.Rarity;
 import com.pluralsight.model.enhancement.*;
 import com.pluralsight.model.weapon.Weapon;
 import com.pluralsight.services.OrderService;

@@ -1,6 +1,6 @@
 package com.pluralsight.ui;
 
-import com.pluralsight.model.Priceable;
+import com.pluralsight.model.interfaces.Priceable;
 import com.pluralsight.model.companion.Companion;
 import com.pluralsight.model.potion.Potion;
 import com.pluralsight.model.weapon.Weapon;

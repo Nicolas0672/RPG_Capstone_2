@@ -1,8 +1,8 @@
 package com.pluralsight.model.weapon;
 
-import com.pluralsight.model.Item;
-import com.pluralsight.model.Priceable;
-import com.pluralsight.model.Rarity;
+import com.pluralsight.model.core.Item;
+import com.pluralsight.model.interfaces.Priceable;
+import com.pluralsight.model.core.Rarity;
 import com.pluralsight.model.enhancement.Enhancement;
 
 import java.util.List;

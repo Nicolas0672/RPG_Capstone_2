@@ -1,7 +1,7 @@
 package com.pluralsight.services;
 
-import com.pluralsight.model.BuffType;
-import com.pluralsight.model.Rarity;
+import com.pluralsight.model.core.BuffType;
+import com.pluralsight.model.core.Rarity;
 import com.pluralsight.model.enhancement.Buffs;
 import com.pluralsight.model.enhancement.Enhancement;
 import com.pluralsight.model.weapon.Sword;

@@ -1,7 +1,7 @@
 package com.pluralsight.model.enhancement;
 
-import com.pluralsight.model.GemType;
-import com.pluralsight.model.Rarity;
+import com.pluralsight.model.core.GemType;
+import com.pluralsight.model.core.Rarity;
 
 public class Gem extends Enhancement {
 

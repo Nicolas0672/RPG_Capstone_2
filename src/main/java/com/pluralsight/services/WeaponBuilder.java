@@ -1,6 +1,6 @@
 package com.pluralsight.services;
 
-import com.pluralsight.model.Priceable;
+import com.pluralsight.model.interfaces.Priceable;
 import com.pluralsight.model.enhancement.*;
 import com.pluralsight.model.weapon.Axe;
 import com.pluralsight.model.weapon.Katana;

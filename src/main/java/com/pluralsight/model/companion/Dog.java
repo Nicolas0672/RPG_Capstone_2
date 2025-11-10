@@ -1,6 +1,6 @@
 package com.pluralsight.model.companion;
 
-import com.pluralsight.model.Rarity;
+import com.pluralsight.model.core.Rarity;
 
 public class Dog extends Companion{
 

@@ -1,7 +1,7 @@
 package com.pluralsight.model.enhancement;
 
-import com.pluralsight.model.CustomizationType;
-import com.pluralsight.model.Rarity;
+import com.pluralsight.model.core.CustomizationType;
+import com.pluralsight.model.core.Rarity;
 
 public class Customization extends Enhancement {
 

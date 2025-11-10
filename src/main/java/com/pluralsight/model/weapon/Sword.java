@@ -1,6 +1,6 @@
 package com.pluralsight.model.weapon;
 
-import com.pluralsight.model.Rarity;
+import com.pluralsight.model.core.Rarity;
 
 public class Sword extends Weapon{
 

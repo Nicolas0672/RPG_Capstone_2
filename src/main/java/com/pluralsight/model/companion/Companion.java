@@ -1,7 +1,7 @@
 package com.pluralsight.model.companion;
 
-import com.pluralsight.model.Priceable;
-import com.pluralsight.model.Rarity;
+import com.pluralsight.model.interfaces.Priceable;
+import com.pluralsight.model.core.Rarity;
 
 public class Companion implements Priceable {
         private final String name;

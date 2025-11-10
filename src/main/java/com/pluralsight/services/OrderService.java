@@ -1,8 +1,9 @@
 package com.pluralsight.services;
 
-import com.pluralsight.model.*;
 import com.pluralsight.model.companion.*;
+import com.pluralsight.model.core.*;
 import com.pluralsight.model.enhancement.*;
+import com.pluralsight.model.interfaces.Priceable;
 import com.pluralsight.model.potion.Potion;
 import com.pluralsight.model.weapon.*;
 

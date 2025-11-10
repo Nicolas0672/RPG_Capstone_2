@@ -1,4 +1,4 @@
-package com.pluralsight.model.enhancement;
+package com.pluralsight.model.interfaces;
 
 public interface Describable {
     String getDescription();

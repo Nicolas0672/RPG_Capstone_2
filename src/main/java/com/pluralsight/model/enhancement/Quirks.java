@@ -1,7 +1,7 @@
 package com.pluralsight.model.enhancement;
 
-import com.pluralsight.model.BonusType;
-import com.pluralsight.model.Rarity;
+import com.pluralsight.model.core.BonusType;
+import com.pluralsight.model.core.Rarity;
 
 public class Quirks extends Enhancement {
 
