@@ -17,9 +17,9 @@ public class DisplayScreen {
 
         while (true) {
             RPGDisplay.printOption(1, "Embark on a new quest ⚔️ (New Order)");
-            RPGDisplay.printOption(0, "Rest for now 🛌 (Exit)\n");
+            RPGDisplay.printOption(0, "Rest for now 🛌 (Exit)");
             String input = scanner.nextLine().trim();
-            System.out.println();
+
             switch (input) {
                 case "1":
                     displayNewOrder();
@@ -47,7 +47,7 @@ public class DisplayScreen {
             RPGDisplay.printOption(5, "Venture to checkout 🏹");
             RPGDisplay.printOption(6, "Abandon quest ❌\n");
             String input = scanner.nextLine().trim();
-            System.out.println();
+
             switch (input) {
                 case "1":
                     new AddSwordScreen().displayAddWeapon(orderService);
