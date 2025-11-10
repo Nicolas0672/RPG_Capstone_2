@@ -135,7 +135,12 @@ public class OrderService {
     }
 
     public static void addEnhancementToWeapon(Weapon weapon, Enhancement enhancement){
-        List<Enhancement> enhancementList = weapon.getEnhancement();
+        List<Enhancement> enhancementList;
+        if(weapon.getEnhancement() != null){
+            enhancementList = weapon.getEnhancement();
+        } else {
+            enhancementList = new ArrayList<>();
+        }
         List<Enhancement> newEnhancementList = new ArrayList<>();
         for(Enhancement enhancement1 : enhancementList){
             String name = enhancement1.getName();
@@ -156,14 +161,17 @@ public class OrderService {
         if(name.equalsIgnoreCase("⚔️ Sword")){
             Sword sword=  new Sword("⚔️ Sword", rarity, hasSpecialAttributes);
             sword.setBaseCost(sword.calculateCost());
+            sword.setDamage((int) (sword.getDamage() * rarity.getMultiplier()));
             return sword;
         } else if(name.equalsIgnoreCase("🪓 Axe")){
             Axe axe =  new Axe("🪓 Axe", rarity, hasSpecialAttributes);
             axe.setBaseCost(axe.calculateCost());
+            axe.setDamage((int) (axe.getDamage() * rarity.getMultiplier()));
             return axe;
         } else if(name.equalsIgnoreCase("🗡️ Katana")){
             Katana katana = new Katana("🗡️ Katana", rarity, hasSpecialAttributes);
             katana.setBaseCost(katana.calculateCost());
+            katana.setDamage((int) (katana.getDamage() * rarity.getMultiplier()));
             return katana;
         } else {
             System.out.println("Invalid weapon");
@@ -232,30 +240,4 @@ public class OrderService {
     }
 }
 
-/*
-=============================
-       JUnit TEST SUGGESTIONS
-=============================
-
-1️⃣ Cart Total Calculation:
-   - getTotalCartPrice
-       • Verify sum matches all items in cart (weapons, potions, companions).
-
-2️⃣ Enhancement Management:
-   - removeEnhancementFromWeapon
-       • Test removal for each enhancement type (gem, buff, quirk, customization).
-       • Ensure weapon's enhancement list updates correctly.
-   - addEnhancementToWeapon
-       • Test adding enhancements and prevent duplicates.
-
-3️⃣ Weapon Builder:
-   - weaponBuild
-       • Test creation of Sword, Axe, Katana with correct baseCost and attributes.
-       • Test invalid weapon name returns null.
-
-4️⃣ Pre-made Orders:
-   - createExistingOrders / ALL_TYPE_OF_ORDERS
-       • Verify each pre-made order contains correct types (Weapon, Potion, Companion).
-       • Verify weapon finalCost = baseCost + enhancements.
-*/
 
