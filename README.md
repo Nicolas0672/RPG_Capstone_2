@@ -16,18 +16,22 @@ RPG Weapon Forge is an interactive shop management system where players can:
 
 ### Main Menu
 <img width="448" height="323" alt="RPGShopMenu" src="https://github.com/user-attachments/assets/27e00687-c67f-432f-9189-71da008bcba8" />
+
 *The starting screen where players choose their action*
 
 ### Weapon Builder
 <img width="341" height="342" alt="RPGShopWeapon" src="https://github.com/user-attachments/assets/b2483936-dca8-49da-a72d-17636d2d8f6b" />
+
 *Interactive weapon customization interface*
 
 ### Shopping Cart
 <img width="392" height="428" alt="RPGShopCart" src="https://github.com/user-attachments/assets/c57ccd79-2c4d-46ee-9478-bfb8055096b2" />
+
 *Review your items before checkout*
 
 ### Receipt
 <img width="277" height="456" alt="RPGShopReceipt" src="https://github.com/user-attachments/assets/925ed4a3-d029-4d2f-934d-b92ebc7daddf" />
+
 *Detailed invoice generated after purchase*
 
 ## 🗂️ Project Structure
