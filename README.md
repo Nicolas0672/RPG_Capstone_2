@@ -15,23 +15,23 @@ RPG Weapon Forge is an interactive shop management system where players can:
 ## 🎮 Application Screenshots
 
 ### Main Menu
-![Main Menu](screenshots/main-menu.png)
+<img width="448" height="323" alt="RPGShopMenu" src="https://github.com/user-attachments/assets/27e00687-c67f-432f-9189-71da008bcba8" />
+
 *The starting screen where players choose their action*
 
 ### Weapon Builder
-![Weapon Builder](screenshots/weapon-builder.png)
+<img width="341" height="342" alt="RPGShopWeapon" src="https://github.com/user-attachments/assets/b2483936-dca8-49da-a72d-17636d2d8f6b" />
+
 *Interactive weapon customization interface*
 
-### Enhancement Selection
-![Enhancement Selection](screenshots/enhancement-selection.png)
-*Browse and add enhancements to your weapon*
-
 ### Shopping Cart
-![Shopping Cart](screenshots/shopping-cart.png)
+<img width="392" height="428" alt="RPGShopCart" src="https://github.com/user-attachments/assets/c57ccd79-2c4d-46ee-9478-bfb8055096b2" />
+
 *Review your items before checkout*
 
 ### Receipt
-![Receipt](screenshots/receipt.png)
+<img width="277" height="456" alt="RPGShopReceipt" src="https://github.com/user-attachments/assets/925ed4a3-d029-4d2f-934d-b92ebc7daddf" />
+
 *Detailed invoice generated after purchase*
 
 ## 🗂️ Project Structure
@@ -80,7 +80,7 @@ RPG-Weapon-Forge/
 
 ## 🏗️ Class Diagram
 
-![Class Diagram](diagrams/class-diagram.png)
+<img width="3753" height="2069" alt="UMLRPGShop" src="https://github.com/user-attachments/assets/75526e62-25b3-45df-82d2-45107e935f5f" />
 
 The application follows object-oriented design principles with clear separation of concerns:
 
