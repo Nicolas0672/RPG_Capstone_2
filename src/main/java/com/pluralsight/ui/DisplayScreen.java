@@ -1,10 +1,17 @@
 package com.pluralsight.ui;
 
-import com.pluralsight.model.*;
+
 import com.pluralsight.services.OrderService;
 import com.pluralsight.ui.utils.Helper;
 import com.pluralsight.ui.utils.RPGDisplay;
 import java.util.Scanner;
+
+import com.pluralsight.model.weapon.Weapon;
+import com.pluralsight.model.core.Item;
+import com.pluralsight.model.core.Rarity;
+import com.pluralsight.model.interfaces.Priceable;
+import com.pluralsight.model.enhancement.Enhancement;
+
 
 public class DisplayScreen {
     Scanner scanner = new Scanner(System.in);

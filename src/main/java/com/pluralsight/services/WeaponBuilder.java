@@ -36,7 +36,7 @@ public class WeaponBuilder {
     public Weapon build(boolean special) {
         // Attach enhancements and calculate final cost
         baseWeapon.setEnhancement(enhancements);
-        baseWeapon.setFinalCost(getTotalPrice(baseWeapon.getBaseCost(), enhancements));
+        baseWeapon.setFinalCost(getTotalEnhancementPrice(baseWeapon.getBaseCost(), enhancements));
         baseWeapon.setSpecial(special);
         return baseWeapon;
     }
@@ -49,6 +49,13 @@ public class WeaponBuilder {
                 .mapToDouble(Priceable::calculateCost)
                 .sum();
         return baseCost + total;
+    }
+
+    public double getTotalEnhancementPrice(double baseCost, List<Enhancement> enhancementList){
+        double total = enhancementList.stream()
+                .mapToDouble(Enhancement::getBaseCost)
+                .sum();
+        return total + baseCost;
     }
 
     public static Weapon cloneWeapon(Weapon original) {

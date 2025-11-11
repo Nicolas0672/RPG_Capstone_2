@@ -46,7 +46,7 @@ public class DisplayCheckoutScreen {
         } else {
             boolean isValid = false;
             while(!isValid){
-                RPGDisplay.printOptions("You must purchase either a Potion or Companion!\n1) Potion\n2) Companion\n3) Exit");
+                RPGDisplay.printStory("You must purchase either a Potion or Companion!\n1) Potion\n2) Companion\n3) Exit");
                 String input = scanner.nextLine();
 
                 switch (input){
@@ -77,7 +77,8 @@ public class DisplayCheckoutScreen {
             RPGDisplay.printOption(1, "Pay now");
             RPGDisplay.printOption(2, "Edit");
             RPGDisplay.printOption(3, "Show cart");
-            RPGDisplay.printOption(4, "Return");
+            RPGDisplay.printOption(4, "Clear cart");
+            RPGDisplay.printOption(5, "Return");
 
             String input = scanner.nextLine();
             switch (input){
@@ -92,6 +93,10 @@ public class DisplayCheckoutScreen {
                     displayTotalItemInCart(weaponList, potionList, companionList);
                     break;
                 case "4":
+                    RPGDisplay.printSuccess("Your cart has been cleared!");
+                    orderService.clearCart();
+                    break;
+                case "5":
                     RPGDisplay.printLeavingMessage();
                     return;
                 default:

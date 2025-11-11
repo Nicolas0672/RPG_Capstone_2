@@ -222,7 +222,7 @@ public class OrderService {
         // 3️⃣ NIGHTSTALKER — Katana with stealth theme
         Weapon nightstalker = new Katana("🌑 Nightstalker (LEGENDARY)", Rarity.LEGENDARY, true);
         nightstalker.setEnhancement(List.of(
-                new Buffs("🎯 Deadly Precision", 30, Rarity.RARE, BuffType.CRITICAL_CHANCE)
+                new Buffs("🎯 Deadly Precision", 20, Rarity.RARE, BuffType.CRITICAL_CHANCE)
         ));
         nightstalker.setDamage(60);
         nightstalker.setBaseCost(nightstalker.calculateCost());

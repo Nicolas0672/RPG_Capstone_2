@@ -145,7 +145,7 @@ public class RPGDisplay {
             System.out.println("Enhancements:");
             for (Enhancement e : w.getEnhancement()) {
                 System.out.println(" - " + e.getClass().getSimpleName() + ": " + e.getName()
-                        + " (" + String.format("%.2f 💰", e.calculateCost()) + ")");
+                        + " (" + String.format("%.2f 💰", e.getBaseCost()) + ")");
             }
         }
         System.out.println();
