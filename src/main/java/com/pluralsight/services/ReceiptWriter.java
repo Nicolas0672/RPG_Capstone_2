@@ -39,8 +39,8 @@ public class ReceiptWriter {
                     if (w.getEnhancement() != null && !w.getEnhancement().isEmpty()) {
                         writer.write("   🔧 Enhancements:\n");
                         for (Enhancement e : w.getEnhancement()) {
-                            writer.write("     • " + e.getName() + " (" + e.getRarity() + ") +" + e.calculateCost() + "\n");
-                            totalCost += e.calculateCost();
+                            writer.write("     • " + e.getName() + " (" + e.getRarity() + ") +" + e.getBaseCost() + "\n");
+                            totalCost += e.getBaseCost();
                         }
                     }
                     writer.write("\n");

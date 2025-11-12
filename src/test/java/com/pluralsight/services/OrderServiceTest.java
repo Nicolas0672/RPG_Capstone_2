@@ -55,17 +55,17 @@ class OrderServiceTest {
         Gem gem = new Gem("🔥 Blazing Edge", 15, Rarity.COMMON, GemType.FIRE);
 
         // Add buff
-        OrderService.addEnhancementToWeapon(sword, buff);
+        orderService.addEnhancementToWeapon(sword, buff);
         assertTrue(sword.getEnhancement().contains(buff));
 
         // Adding same name again should replace old one
         Buffs duplicateBuff = new Buffs("💥 Mighty Blow", 20, Rarity.RARE, BuffType.DAMAGE_BOOST);
-        OrderService.addEnhancementToWeapon(sword, duplicateBuff);
+        orderService.addEnhancementToWeapon(sword, duplicateBuff);
         assertTrue(sword.getEnhancement().contains(duplicateBuff));
         assertEquals(1, sword.getEnhancement().stream().filter(e -> e.getName().equals("💥 Mighty Blow")).count());
 
         // Add gem
-        OrderService.addEnhancementToWeapon(sword, gem);
+        orderService.addEnhancementToWeapon(sword, gem);
         assertTrue(sword.getEnhancement().contains(gem));
     }
 
@@ -76,12 +76,12 @@ class OrderServiceTest {
         sword.setEnhancement(List.of(buff, gem));
 
         // Remove buff
-        OrderService.removeEnhancementFromWeapon(sword, "💥 Mighty Blow", "buff");
+        orderService.removeEnhancementFromWeapon(sword, "💥 Mighty Blow", "buff");
         assertFalse(sword.getEnhancement().contains(buff));
         assertTrue(sword.getEnhancement().contains(gem));
 
         // Remove gem
-        OrderService.removeEnhancementFromWeapon(sword, "🔥 Blazing Edge", "gem");
+        orderService.removeEnhancementFromWeapon(sword, "🔥 Blazing Edge", "gem");
         assertFalse(sword.getEnhancement().contains(gem));
     }
 

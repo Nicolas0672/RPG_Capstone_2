@@ -51,7 +51,7 @@ public class WeaponBuilder {
         return baseCost + total;
     }
 
-    public double getTotalEnhancementPrice(double baseCost, List<Enhancement> enhancementList){
+    public static double getTotalEnhancementPrice(double baseCost, List<Enhancement> enhancementList){
         double total = enhancementList.stream()
                 .mapToDouble(Enhancement::getBaseCost)
                 .sum();

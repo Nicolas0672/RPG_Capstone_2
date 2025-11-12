@@ -40,8 +40,10 @@ public class EditScreen {
                 .findFirst()
                 .orElse("No gem");
 
+        boolean noGem = gemName.equalsIgnoreCase("no gem");
+
         boolean isValid = false;
-        while (!isValid) {
+        while (!isValid && !noGem) {
             RPGDisplay.printStory(String.format("Would you like to remove %s out of your weapon?", gemName));
             RPGDisplay.printOption(1, "Yes");
             RPGDisplay.printOption(2, "No");
@@ -49,7 +51,7 @@ public class EditScreen {
             String input = scanner.nextLine();
             switch (input) {
                 case "1":
-                    OrderService.removeEnhancementFromWeapon(weapon, gemName, "gem");
+                    orderService.removeEnhancementFromWeapon(weapon, gemName, "gem");
                     isValid = true;
                     RPGDisplay.printSuccess(gemName + " has been successfully removed!");
                     displayAddGemToSword(orderService, weapon);
@@ -60,6 +62,9 @@ public class EditScreen {
                 case "3":
                     RPGDisplay.printWarning("Invalid option! Please try again");
             }
+        }
+        if(noGem){
+            displayAddGemToSword(orderService, weapon);
         }
     }
 
@@ -86,7 +91,7 @@ public class EditScreen {
                 case "1":
                     Gem gem = Helper.getSelectionFromList(gemList, scanner);
                     if (gem == null) break;
-                    OrderService.addEnhancementToWeapon(weapon, gem);
+                    orderService.addEnhancementToWeapon(weapon, gem);
                     RPGDisplay.printSuccess(String.format("Congratulations! %s has been imbued to the weapon.", gem.getName()));
                     isValid = true;
                     break;
@@ -168,7 +173,7 @@ public class EditScreen {
             return;
         }
 
-        OrderService.addEnhancementToWeapon(weapon, buff);
+        orderService.addEnhancementToWeapon(weapon, buff);
         RPGDisplay.printSuccess(String.format("Congratulations! %s has been added to the weapon.", buff.getName()));
     }
 
@@ -183,7 +188,7 @@ public class EditScreen {
             return;
         }
 
-        OrderService.removeEnhancementFromWeapon(weapon, removedBuff, "buff");
+        orderService.removeEnhancementFromWeapon(weapon, removedBuff, "buff");
         RPGDisplay.printSuccess(removedBuff + " has been successfully removed!\n");
     }
 
@@ -245,7 +250,7 @@ public class EditScreen {
             return;
         }
 
-        OrderService.addEnhancementToWeapon(weapon, quirk);
+        orderService.addEnhancementToWeapon(weapon, quirk);
         RPGDisplay.printSuccess(String.format("Congratulations! %s has been added to the weapon.", quirk.getName()));
     }
 
@@ -257,7 +262,7 @@ public class EditScreen {
             return;
         }
 
-        OrderService.removeEnhancementFromWeapon(weapon, removedQuirk, "quirk");
+        orderService.removeEnhancementFromWeapon(weapon, removedQuirk, "quirk");
         RPGDisplay.printSuccess(removedQuirk + " has been successfully removed!\n");
     }
 
@@ -319,7 +324,7 @@ public class EditScreen {
             return;
         }
 
-        OrderService.addEnhancementToWeapon(weapon, customization);
+        orderService.addEnhancementToWeapon(weapon, customization);
         RPGDisplay.printSuccess(String.format("Congratulations! %s has been added to the weapon.", customization.getName()));
     }
 
@@ -331,7 +336,7 @@ public class EditScreen {
             return;
         }
 
-        OrderService.removeEnhancementFromWeapon(weapon, removedCustomization, "customization");
+        orderService.removeEnhancementFromWeapon(weapon, removedCustomization, "customization");
         RPGDisplay.printSuccess(removedCustomization + " has been successfully removed!\n");
     }
 }

@@ -92,6 +92,11 @@ public class OrderService {
         totalPriceOrder.add(finalWeapon.getFinalCost());
     }
 
+    public void addNewWeaponPriceToCart(double initialPrice, double finalPrice){
+        totalPriceOrder.remove(initialPrice);
+        totalPriceOrder.add(finalPrice);
+    }
+
     public void addPotionToCart(Potion potion){
         potionList.add(potion);
         totalPriceOrder.add(potion.getBaseCost());
@@ -119,7 +124,7 @@ public class OrderService {
     //           ENHANCEMENT MANAGEMENT
     // ===========================================
 
-    public static void removeEnhancementFromWeapon(Weapon w, String enhancementName, String type){
+    public void removeEnhancementFromWeapon(Weapon w, String enhancementName, String type){
         List<Enhancement> enhancementList = new ArrayList<>(w.getEnhancement());
         switch (type){
             case "gem" -> enhancementList.removeIf(e -> e instanceof Gem && e.getName().equalsIgnoreCase(enhancementName));
@@ -128,6 +133,10 @@ public class OrderService {
             case "customization" -> enhancementList.removeIf(c -> c instanceof Customization && c.getName().equalsIgnoreCase(enhancementName));
         }
         w.setEnhancement(enhancementList);
+        double newEnhancementPrice = WeaponBuilder.getTotalEnhancementPrice(w.getBaseCost(), w.getEnhancement());
+        double initialPrice = w.getFinalCost();
+        w.setFinalCost(newEnhancementPrice);
+        addNewWeaponPriceToCart(initialPrice, w.getFinalCost());
     }
 
     public void removePotionFromCart(Potion potion){
@@ -135,7 +144,7 @@ public class OrderService {
         totalPriceOrder.remove(potion.getBaseCost());
     }
 
-    public static void addEnhancementToWeapon(Weapon weapon, Enhancement enhancement){
+    public void addEnhancementToWeapon(Weapon weapon, Enhancement enhancement){
         List<Enhancement> enhancementList;
         if(weapon.getEnhancement() != null){
             enhancementList = weapon.getEnhancement();
@@ -151,6 +160,12 @@ public class OrderService {
         }
         newEnhancementList.add(enhancement);
         weapon.setEnhancement(newEnhancementList);
+
+        double newEnhancementPrice = WeaponBuilder.getTotalEnhancementPrice(weapon.getBaseCost(), weapon.getEnhancement());
+        double initialPrice = weapon.getFinalCost();
+        weapon.setFinalCost(newEnhancementPrice);
+        addNewWeaponPriceToCart(initialPrice, weapon.getFinalCost());
+
     }
 
     // ===========================================
@@ -198,7 +213,7 @@ public class OrderService {
         ));
         flamebringer.setBaseCost(flamebringer.calculateCost());
         flamebringer.setDamage(40);
-        flamebringer.setFinalCost(weaponBuilder.getTotalPrice(flamebringer.getBaseCost(), flamebringer.getEnhancement()));
+        flamebringer.setFinalCost(WeaponBuilder.getTotalEnhancementPrice(flamebringer.getBaseCost(), flamebringer.getEnhancement()));
 
         Potion flamePotion = new Potion("🔥 Fire Resistance Potion", 10, Rarity.RARE);
         Companion horse = new Horse("🐎 Horse", 30, Rarity.RARE);
@@ -213,7 +228,7 @@ public class OrderService {
         ));
         frostbite.setBaseCost(frostbite.calculateCost());
         frostbite.setDamage(30);
-        frostbite.setFinalCost(weaponBuilder.getTotalPrice(frostbite.getBaseCost(), frostbite.getEnhancement()));
+        frostbite.setFinalCost(WeaponBuilder.getTotalEnhancementPrice(frostbite.getBaseCost(), frostbite.getEnhancement()));
 
         Potion potion = new Potion("💨 Swift Potion", 15, Rarity.COMMON);
         Companion dog = new Dog("🐶 Dog", 5, Rarity.COMMON);
@@ -226,7 +241,7 @@ public class OrderService {
         ));
         nightstalker.setDamage(60);
         nightstalker.setBaseCost(nightstalker.calculateCost());
-        nightstalker.setFinalCost(weaponBuilder.getTotalPrice(nightstalker.getBaseCost(), nightstalker.getEnhancement()));
+        nightstalker.setFinalCost(WeaponBuilder.getTotalEnhancementPrice(nightstalker.getBaseCost(), nightstalker.getEnhancement()));
 
         Potion nightVision = new Potion("🌙 Night Resistance", 25, Rarity.LEGENDARY);
         Companion dragon = new Dragon("🐉 Dragon", 50, Rarity.LEGENDARY);
