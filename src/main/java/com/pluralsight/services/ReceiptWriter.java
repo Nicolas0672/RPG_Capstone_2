@@ -4,6 +4,7 @@ import com.pluralsight.model.companion.Companion;
 import com.pluralsight.model.potion.Potion;
 import com.pluralsight.model.weapon.Weapon;
 import com.pluralsight.model.enhancement.Enhancement;
+import com.pluralsight.ui.utils.RPGDisplay;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -18,6 +19,11 @@ public class ReceiptWriter {
         // Format timestamp for unique filename
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
         String fileName = "receipts/" + timestamp + ".txt";
+
+        if(weapons.isEmpty() && potions.isEmpty() && companions.isEmpty()){
+            RPGDisplay.printWarning("Nothing is in cart. Returning...");
+            return;
+        }
 
 
         double totalCost = 0.0;

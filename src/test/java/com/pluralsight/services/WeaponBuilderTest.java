@@ -46,7 +46,7 @@ public class WeaponBuilderTest {
         assertEquals(List.of(buff1, buff2), builtWeapon.getEnhancement(), "Enhancement should match");
         assertTrue(baseWeapon.hasSpecial(), "Weapon should be special");
 
-        double expectedPrice = baseWeapon.getBaseCost() + buff1.calculateCost() + buff2.calculateCost();
+        double expectedPrice = baseWeapon.getBaseCost() + buff1.getBaseCost() + buff2.getBaseCost();
         assertEquals(expectedPrice, baseWeapon.getFinalCost(), "Price should be same");
     }
 
